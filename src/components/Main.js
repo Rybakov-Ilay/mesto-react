@@ -1,24 +1,11 @@
-function Main() {
-    function handleEditAvatarClick() {
-        document.querySelector('.popup_avatar').classList.add('popup_opened');
-    }
-
-    function handleEditProfileClick() {
-        document.querySelector('.popup_edit').classList.add('popup_opened');
-    }
-
-    function handleAddPlaceClick() {
-        document.querySelector('.popup_add').classList.add('popup_opened');
-    }
-
-
+function Main(props) {
     return (
         <main className="content">
 
             <section className="profile">
                 <div className="profile__avatar-wrapper">
                     <img className="profile__avatar" src="#" alt="Портрет автора"/>
-                    <div className="profile__avatar-edit" onClick={handleEditAvatarClick}/>
+                    <div className="profile__avatar-edit" onClick={props.onEditAvatar}/>
                 </div>
                 <div className="profile__info">
                     <div className="profile__title-container">
@@ -27,7 +14,7 @@ function Main() {
                             className="profile__edit-button"
                             type="button"
                             aria-label="редактировать профиль"
-                            onClick={handleEditProfileClick}
+                            onClick={props.onEditProfile}
                         />
                     </div>
                     <p className="profile__subtitle">Увлечение автора</p>
@@ -37,7 +24,7 @@ function Main() {
                         className="profile__add-button"
                         type="button"
                         aria-label="добавить фотографию"
-                        onClick={handleAddPlaceClick}
+                        onClick={props.onAddPlace}
                     />
                 </div>
             </section>

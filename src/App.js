@@ -6,12 +6,22 @@ import ImagePopup from "./components/ImagePopup";
 
 
 function App() {
+    function handleEditAvatarClick() {
+        document.querySelector('.popup_avatar').classList.add('popup_opened');
+    }
 
+    function handleEditProfileClick() {
+        document.querySelector('.popup_edit').classList.add('popup_opened');
+    }
+
+    function handleAddPlaceClick() {
+        document.querySelector('.popup_add').classList.add('popup_opened');
+    }
   return (
     <div className="App">
       <div className="page">
         <Header/>
-        <Main/>
+        <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick}/>
         <Footer/>
       </div>
 
