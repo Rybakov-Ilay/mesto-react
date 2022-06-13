@@ -1,9 +1,12 @@
 import Header from "./components/Header";
 import Main from "./components/Main";
 import Footer from "./components/Footer";
+import PopupWithForm from "./components/PopupWithForm";
+import ImagePopup from "./components/ImagePopup";
 
 
 function App() {
+
   return (
     <div className="App">
       <div className="page">
@@ -12,128 +15,74 @@ function App() {
         <Footer/>
       </div>
 
-      <div className="popup popup_edit">
-        <div className="popup__container">
-          <button
-              className="popup__button-close"
-              type="button"
-              aria-label="закрыть форму редактировать профиль"
-          ></button>
-          <h3 className="popup__form-title">Редактировать профиль</h3>
+      <PopupWithForm name="edit" title="Редактировать профиль">
+        <div className="popup__input-wrapper">
+          <input
+              className="popup__input popup__input_type_name"
+              type="text"
+              name="userName"
+              placeholder="Ваше имя"
+              required
+              minLength="2"
+              maxLength="40"
+              id="userName-input"
+          />
 
-          <form className="popup__form" name="profileEditingForm" noValidate>
-            <div className="popup__input-wrapper">
-              <input
-                  className="popup__input popup__input_type_name"
-                  type="text"
-                  name="userName"
-                  placeholder="Ваше имя"
-                  required
-                  minLength="2"
-                  maxLength="40"
-                  id="userName-input"
-              />
-
-              <span className="userName-input-error popup__input-error"></span>
-            </div>
-
-            <div className="popup__input-wrapper">
-              <input
-                  className="popup__input popup__input_type_job"
-                  type="text"
-                  name="userJob"
-                  placeholder="Ваше призвание"
-                  required
-                  minLength="2"
-                  maxLength="200"
-                  id="userJob-input"
-              />
-
-              <span className="userJob-input-error popup__input-error"></span>
-            </div>
-
-            <button className="popup__submit" type="submit" name="popupSubmit">Сохранить</button>
-          </form>
+          <span className="userName-input-error popup__input-error"></span>
         </div>
-      </div>
+        <div className="popup__input-wrapper">
+          <input
+              className="popup__input popup__input_type_job"
+              type="text"
+              name="userJob"
+              placeholder="Ваше призвание"
+              required
+              minLength="2"
+              maxLength="200"
+              id="userJob-input"
+          />
 
-      <div className="popup popup_add">
-        <div className="popup__container">
-          <button
-              className="popup__button-close"
-              type="button"
-              aria-label="закрыть форму добавления"
-          ></button>
-          <h3 className="popup__form-title">Новое место</h3>
-
-          <form className="popup__form" name="addCardForm" noValidate>
-            <div className="popup__input-wrapper">
-              <input
-                  className="popup__input popup__input_type_place-name"
-                  type="text"
-                  name="placeName"
-                  placeholder="название"
-                  required
-                  minLength="2"
-                  maxLength="30"
-                  id="placeName-input"
-              />
-
-              <span className="placeName-input-error popup__input-error"></span>
-            </div>
-            <div className="popup__input-wrapper">
-              <input
-                  className="popup__input popup__input_type_place-link"
-                  type="url"
-                  name="placeLink"
-                  placeholder="ссылка на картинку"
-                  required
-                  id="placeLink-input"
-              />
-
-              <span className="placeLink-input-error popup__input-error"></span>
-            </div>
-            <button className="popup__submit" type="submit" name="popupSubmit">Сохранить</button>
-          </form>
+          <span className="userJob-input-error popup__input-error"></span>
         </div>
-      </div>
+        <button className="popup__submit" type="submit" name="popupSubmit">Сохранить</button>
+      </PopupWithForm>
 
-      <div className="popup popup_view-image">
-        <div className="popup__wrapper">
-          <button
-              className="popup__button-close"
-              type="button"
-              aria-label="закрыть форму добавления"
-          ></button>
-          <img className="popup__image" src="#" alt="#"/>
-          <p className="popup__image-caption">подпись</p>
+      <PopupWithForm name="add" title="Новое место">
+        <div className="popup__input-wrapper">
+          <input
+              className="popup__input popup__input_type_place-name"
+              type="text"
+              name="placeName"
+              placeholder="название"
+              required
+              minLength="2"
+              maxLength="30"
+              id="placeName-input"
+          />
+
+          <span className="placeName-input-error popup__input-error"></span>
         </div>
-      </div>
+        <div className="popup__input-wrapper">
+          <input
+              className="popup__input popup__input_type_place-link"
+              type="url"
+              name="placeLink"
+              placeholder="ссылка на картинку"
+              required
+              id="placeLink-input"
+          />
 
-      <div className="popup popup_delete">
-        <div className="popup__container">
-          <button
-              className="popup__button-close"
-              type="button"
-              aria-label="закрыть форму добавления"
-          ></button>
-          <h3 className="popup__form-title">Вы уверены?</h3>
-          <form className="popup__form" name="deleteCardForm" noValidate>
-            <button className="popup__submit" type="submit">Да</button>
-          </form>
+          <span className="placeLink-input-error popup__input-error"></span>
         </div>
-      </div>
+        <button className="popup__submit" type="submit" name="popupSubmit">Сохранить</button>
+      </PopupWithForm>
 
-      <div className="popup popup_avatar">
-        <div className="popup__container">
-          <button
-              className="popup__button-close"
-              type="button"
-              aria-label="закрыть форму добавления"
-          ></button>
-          <h3 className="popup__form-title">Обновить аватар</h3>
-          <form className="popup__form" name="avatarEditForm" noValidate>
-            <div className="popup__input-wrapper">
+      <PopupWithForm name="delete" title="Вы уверены?">
+        <button className="popup__submit" type="submit">Да</button>
+      </PopupWithForm>
+
+      <PopupWithForm name="avatar" title="Обновить аватар">
+          <div className="popup__input-wrapper">
               <input
                   className="popup__input popup__input_type_place-link"
                   type="url"
@@ -143,11 +92,11 @@ function App() {
                   id="avatarLink-input"
               />
               <span className="avatarLink-input-error popup__input-error"></span>
-            </div>
-            <button className="popup__submit" type="submit" name="popupSubmit">Сохранить</button>
-          </form>
-        </div>
-      </div>
+          </div>
+          <button className="popup__submit" type="submit" name="popupSubmit">Сохранить</button>
+      </PopupWithForm>
+
+      <ImagePopup/>
 
       <template className="cards cards_template">
         <li className="card">

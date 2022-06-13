@@ -14,12 +14,12 @@ function Main() {
 
     return (
         <main className="content">
+
             <section className="profile">
                 <div className="profile__avatar-wrapper">
                     <img className="profile__avatar" src="#" alt="Портрет автора"/>
                     <div className="profile__avatar-edit" onClick={handleEditAvatarClick}/>
                 </div>
-
                 <div className="profile__info">
                     <div className="profile__title-container">
                         <h1 className="profile__title">Имя автора</h1>
@@ -41,9 +41,11 @@ function Main() {
                     />
                 </div>
             </section>
+
             <section className="cards" aria-label="Фотографии автора с подписями">
                 <ul className="cards__list"></ul>
             </section>
+
         </main>
     )
 }
