@@ -19,22 +19,28 @@ function App() {
         setIsAddPlacePopupOpen(true)
     }
 
+    function handleCardClick(card) {
+        setSelectedCard(card)
+    }
+
     function closeAllPopups() {
         setIsEditProfilePopupOpen(false);
         setIsAddPlacePopupOpen(false);
         setIsEditAvatarPopupOpen(false);
+        setSelectedCard({})
     }
 
     const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
     const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
     const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+    const [selectedCard, setSelectedCard] = React.useState({});
 
 
   return (
     <div className="App">
       <div className="page">
         <Header/>
-        <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick}/>
+        <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick}/>
         <Footer/>
       </div>
 
@@ -112,31 +118,7 @@ function App() {
           </div>
       </PopupWithForm>
 
-      <ImagePopup/>
-
-      <template className="cards cards_template">
-        <li className="card">
-          <article className="card__article">
-            <button
-                className="card__trash"
-                aria-label="корзина"
-                type="button"
-            ></button>
-            <img className="card__image" alt="#" src="#"/>
-            <div className="card__caption">
-              <h2 className="card__caption-title"></h2>
-              <div className="card__like-wrapper">
-                <button
-                    className="card__button-like"
-                    aria-label="лайк"
-                    type="button"
-                ></button>
-                <p className="card__like-count">1</p>
-              </div>
-            </div>
-          </article>
-        </li>
-      </template>
+      <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
 
     </div>
   );
