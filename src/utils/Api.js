@@ -1,4 +1,4 @@
-import {optionsApi} from "./constants.js";
+import { optionsApi } from "./constants.js";
 
 class Api {
   constructor(options) {
@@ -95,6 +95,6 @@ class Api {
   }
 }
 
-const api = new Api(optionsApi)
+const api = new Api(optionsApi);
 
-export default api
+export default api;
