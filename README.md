@@ -1,5 +1,3 @@
-[![pages-build-deployment](https://github.com/Rybakov-Ilay/mesto-react/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/Rybakov-Ilay/mesto/actions/workflows/pages/pages-build-deployment)
-
 # Проект [Mesto-React](https://rybakov-ilay.github.io/mesto-react/)
 
 ## Описание
