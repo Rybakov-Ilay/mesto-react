@@ -3,20 +3,33 @@ import Main from "./components/Main";
 import Footer from "./components/Footer";
 import PopupWithForm from "./components/PopupWithForm";
 import ImagePopup from "./components/ImagePopup";
+import React from "react";
 
 
 function App() {
     function handleEditAvatarClick() {
-        document.querySelector('.popup_avatar').classList.add('popup_opened');
+        setIsEditAvatarPopupOpen(true);
     }
 
     function handleEditProfileClick() {
-        document.querySelector('.popup_edit').classList.add('popup_opened');
+        setIsEditProfilePopupOpen(true);
     }
 
     function handleAddPlaceClick() {
-        document.querySelector('.popup_add').classList.add('popup_opened');
+        setIsAddPlacePopupOpen(true)
     }
+
+    function closeAllPopups() {
+        setIsEditProfilePopupOpen(false);
+        setIsAddPlacePopupOpen(false);
+        setIsEditAvatarPopupOpen(false);
+    }
+
+    const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
+    const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+    const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+
+
   return (
     <div className="App">
       <div className="page">
@@ -25,7 +38,7 @@ function App() {
         <Footer/>
       </div>
 
-      <PopupWithForm name="edit" title="Редактировать профиль">
+      <PopupWithForm name="edit" title="Редактировать профиль" isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>
         <div className="popup__input-wrapper">
           <input
               className="popup__input popup__input_type_name"
@@ -37,8 +50,7 @@ function App() {
               maxLength="40"
               id="userName-input"
           />
-
-          <span className="userName-input-error popup__input-error"></span>
+          <span className="userName-input-error popup__input-error"/>
         </div>
         <div className="popup__input-wrapper">
           <input
@@ -51,13 +63,11 @@ function App() {
               maxLength="200"
               id="userJob-input"
           />
-
-          <span className="userJob-input-error popup__input-error"></span>
+          <span className="userJob-input-error popup__input-error"/>
         </div>
-        <button className="popup__submit" type="submit" name="popupSubmit">Сохранить</button>
       </PopupWithForm>
 
-      <PopupWithForm name="add" title="Новое место">
+      <PopupWithForm name="add" title="Новое место" isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}>
         <div className="popup__input-wrapper">
           <input
               className="popup__input popup__input_type_place-name"
@@ -70,7 +80,7 @@ function App() {
               id="placeName-input"
           />
 
-          <span className="placeName-input-error popup__input-error"></span>
+          <span className="placeName-input-error popup__input-error"/>
         </div>
         <div className="popup__input-wrapper">
           <input
@@ -82,16 +92,13 @@ function App() {
               id="placeLink-input"
           />
 
-          <span className="placeLink-input-error popup__input-error"></span>
+          <span className="placeLink-input-error popup__input-error"/>
         </div>
-        <button className="popup__submit" type="submit" name="popupSubmit">Сохранить</button>
       </PopupWithForm>
 
-      <PopupWithForm name="delete" title="Вы уверены?">
-        <button className="popup__submit" type="submit">Да</button>
-      </PopupWithForm>
+      <PopupWithForm name="delete" title="Вы уверены?" buttonText="Да" onClose={closeAllPopups}/>
 
-      <PopupWithForm name="avatar" title="Обновить аватар">
+      <PopupWithForm name="avatar" title="Обновить аватар" isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}>
           <div className="popup__input-wrapper">
               <input
                   className="popup__input popup__input_type_place-link"
@@ -101,9 +108,8 @@ function App() {
                   required
                   id="avatarLink-input"
               />
-              <span className="avatarLink-input-error popup__input-error"></span>
+              <span className="avatarLink-input-error popup__input-error"/>
           </div>
-          <button className="popup__submit" type="submit" name="popupSubmit">Сохранить</button>
       </PopupWithForm>
 
       <ImagePopup/>
