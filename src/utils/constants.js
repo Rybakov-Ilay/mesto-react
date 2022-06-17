@@ -10,9 +10,9 @@ export const config = {
 const content = document.querySelector(".content");
 
 // кнопки открытия форм
-export const editProfileButton = content.querySelector(".profile__edit-button");
-export const addCardButton = content.querySelector(".profile__add-button");
-export const editAvatarButton = content.querySelector(".profile__avatar-edit");
+// export const editProfileButton = content.querySelector(".profile__edit-button");
+// export const addCardButton = content.querySelector(".profile__add-button");
+// export const editAvatarButton = content.querySelector(".profile__avatar-edit");
 
 // Селекторы
 export const CARD_TEMPLATE_SELECTOR = ".cards_template";

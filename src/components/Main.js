@@ -6,6 +6,7 @@ function Main(props) {
     const [userName, setUserName] = React.useState("Кусто");
     const [userDescription, setUserDescription] = React.useState("Исследователь");
     const [userAvatar, setUserAvatar] = React.useState(avatar);
+    const [cards, setCards] = React.useState([]);
 
     React.useEffect(() => {
         api.getUser()
@@ -17,7 +18,17 @@ function Main(props) {
             .catch((err) => {
                 console.log(err);
             });
-    });
+    }, []);
+
+    React.useEffect(() => {
+        api.getInitialCards()
+            .then((data) => {
+                setCards(data)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }, [])
 
 
     return (
@@ -51,7 +62,30 @@ function Main(props) {
             </section>
 
             <section className="cards" aria-label="Фотографии автора с подписями">
-                <ul className="cards__list"></ul>
+                <ul className="cards__list">
+                    {cards.map((card, i) => (
+                        <li key={i} className="card">
+                            <article className="card__article">
+                                <button
+                                    className="card__trash"
+                                    aria-label="корзина"
+                                    type="button"
+                                />
+                                <img className="card__image" alt="#" src={card.link}/>
+                                <div className="card__caption">
+                                    <h2 className="card__caption-title">{card.name}</h2>
+                                    <div className="card__like-wrapper">
+                                        <button
+                                            className="card__button-like"
+                                            aria-label="лайк"
+                                            type="button"
+                                        />
+                                        <p className="card__like-count">{card.likes.length}</p>
+                                    </div>
+                                </div>
+                            </article>
+                        </li>))}
+                </ul>
             </section>
 
         </main>
