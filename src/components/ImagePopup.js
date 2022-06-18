@@ -12,7 +12,7 @@ function ImagePopup(props) {
           aria-label="закрыть форму добавления"
           onClick={props.onClose}
         />
-        <img className="popup__image" src={props.card.link} alt="#" />
+        <img className="popup__image" src={props.card.link} alt={props.card.name} />
         <p className="popup__image-caption">{props.card.name}</p>
       </div>
     </div>

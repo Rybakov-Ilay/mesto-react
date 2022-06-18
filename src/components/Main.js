@@ -1,15 +1,15 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import avatar from "../images/avatar-kusto.png";
 import api from "../utils/Api";
 import Card from "../components/Card.js";
 
 function Main(props) {
-  const [userName, setUserName] = React.useState("Кусто");
-  const [userDescription, setUserDescription] = React.useState("Исследователь");
-  const [userAvatar, setUserAvatar] = React.useState(avatar);
-  const [cards, setCards] = React.useState([]);
+  const [userName, setUserName] = useState("Кусто");
+  const [userDescription, setUserDescription] = useState("Исследователь");
+  const [userAvatar, setUserAvatar] = useState(avatar);
+  const [cards, setCards] = useState([]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     api
       .getUser()
       .then((data) => {
@@ -22,7 +22,7 @@ function Main(props) {
       });
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     api
       .getInitialCards()
       .then((data) => {
@@ -68,8 +68,8 @@ function Main(props) {
 
       <section className="cards" aria-label="Фотографии автора с подписями">
         <ul className="cards__list">
-          {cards.map((card, i) => (
-            <Card key={i} card={card} handleClick={props.onCardClick} />
+          {cards.map((card) => (
+            <Card key={card._id} card={card} handleClick={props.onCardClick} />
           ))}
         </ul>
       </section>
