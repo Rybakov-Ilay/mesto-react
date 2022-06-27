@@ -23,7 +23,7 @@ function App() {
           name: data.name,
           about: data.about,
           avatar: data.avatar,
-          _id: data._id
+          _id: data._id,
         });
       })
       .catch((err) => {
@@ -56,8 +56,8 @@ function App() {
 
   return (
     <div className="App">
-      <div className="page">
-        <CurrentUserContext.Provider value={currentUser}>
+      <CurrentUserContext.Provider value={currentUser}>
+        <div className="page">
           <Header />
           <Main
             onEditProfile={handleEditProfileClick}
@@ -66,72 +66,75 @@ function App() {
             onCardClick={handleCardClick}
           />
           <Footer />
-        </CurrentUserContext.Provider>
-      </div>
-
-      <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
-
-      <PopupWithForm
-        name="add"
-        title="Новое место"
-        isOpen={isAddPlacePopupOpen}
-        onClose={closeAllPopups}
-      >
-        <div className="popup__input-wrapper">
-          <input
-            className="popup__input popup__input_type_place-name"
-            type="text"
-            name="placeName"
-            placeholder="название"
-            required
-            minLength="2"
-            maxLength="30"
-            id="placeName-input"
-          />
-
-          <span className="placeName-input-error popup__input-error" />
         </div>
-        <div className="popup__input-wrapper">
-          <input
-            className="popup__input popup__input_type_place-link"
-            type="url"
-            name="placeLink"
-            placeholder="ссылка на картинку"
-            required
-            id="placeLink-input"
-          />
 
-          <span className="placeLink-input-error popup__input-error" />
-        </div>
-      </PopupWithForm>
+        <EditProfilePopup
+          isOpen={isEditProfilePopupOpen}
+          onClose={closeAllPopups}
+        />
 
-      <PopupWithForm
-        name="delete"
-        title="Вы уверены?"
-        buttonText="Да"
-        onClose={closeAllPopups}
-      />
+        <PopupWithForm
+          name="add"
+          title="Новое место"
+          isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}
+        >
+          <div className="popup__input-wrapper">
+            <input
+              className="popup__input popup__input_type_place-name"
+              type="text"
+              name="placeName"
+              placeholder="название"
+              required
+              minLength="2"
+              maxLength="30"
+              id="placeName-input"
+            />
 
-      <PopupWithForm
-        name="avatar"
-        title="Обновить аватар"
-        isOpen={isEditAvatarPopupOpen}
-        onClose={closeAllPopups}
-      >
-        <div className="popup__input-wrapper">
-          <input
-            className="popup__input popup__input_type_place-link"
-            type="url"
-            name="avatarLink"
-            placeholder="ссылка на картинку"
-            required
-            id="avatarLink-input"
-          />
-          <span className="avatarLink-input-error popup__input-error" />
-        </div>
-      </PopupWithForm>
+            <span className="placeName-input-error popup__input-error" />
+          </div>
+          <div className="popup__input-wrapper">
+            <input
+              className="popup__input popup__input_type_place-link"
+              type="url"
+              name="placeLink"
+              placeholder="ссылка на картинку"
+              required
+              id="placeLink-input"
+            />
 
-      <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+            <span className="placeLink-input-error popup__input-error" />
+          </div>
+        </PopupWithForm>
+
+        <PopupWithForm
+          name="delete"
+          title="Вы уверены?"
+          buttonText="Да"
+          onClose={closeAllPopups}
+        />
+
+        <PopupWithForm
+          name="avatar"
+          title="Обновить аватар"
+          isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
+        >
+          <div className="popup__input-wrapper">
+            <input
+              className="popup__input popup__input_type_place-link"
+              type="url"
+              name="avatarLink"
+              placeholder="ссылка на картинку"
+              required
+              id="avatarLink-input"
+            />
+            <span className="avatarLink-input-error popup__input-error" />
+          </div>
+        </PopupWithForm>
+
+        <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+      </CurrentUserContext.Provider>
     </div>
   );
 }
