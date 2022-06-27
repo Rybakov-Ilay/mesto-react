@@ -93,6 +93,24 @@ class Api {
       return this._getResponseData(res);
     });
   }
+
+  changeLikeCardStatus(idCard, isLiked) {
+    if (isLiked) {
+      return fetch(`${this._baseUrl}/cards/${idCard}/likes`, {
+        method: "DELETE",
+        headers: this._headers,
+      }).then((res) => {
+        return this._getResponseData(res);
+      });
+    } else {
+      return fetch(`${this._baseUrl}/cards/${idCard}/likes`, {
+        method: "PUT",
+        headers: this._headers,
+      }).then((res) => {
+        return this._getResponseData(res);
+      });
+    }
+  }
 }
 
 const api = new Api(optionsApi);
