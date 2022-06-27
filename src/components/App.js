@@ -22,6 +22,7 @@ function App() {
           name: data.name,
           about: data.about,
           avatar: data.avatar,
+          _id: data._id
         });
       })
       .catch((err) => {
