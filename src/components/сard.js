@@ -17,11 +17,11 @@ function Card({ card, handleClick, onCardLike, onCardDelete }) {
   }
 
   function handleLikeClick() {
-    onCardLike(card)
+    onCardLike(card);
   }
 
   function handleDeleteClick() {
-    onCardDelete(card)
+    onCardDelete(card);
   }
 
   return (

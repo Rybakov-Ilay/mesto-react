@@ -3,6 +3,7 @@ import Main from "./Main";
 import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
+import EditProfilePopup from "./EditProfilePopup";
 import React, { useState, useEffect } from "react";
 import api from "../utils/Api";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
@@ -68,39 +69,7 @@ function App() {
         </CurrentUserContext.Provider>
       </div>
 
-      <PopupWithForm
-        name="edit"
-        title="Редактировать профиль"
-        isOpen={isEditProfilePopupOpen}
-        onClose={closeAllPopups}
-      >
-        <div className="popup__input-wrapper">
-          <input
-            className="popup__input popup__input_type_name"
-            type="text"
-            name="userName"
-            placeholder="Ваше имя"
-            required
-            minLength="2"
-            maxLength="40"
-            id="userName-input"
-          />
-          <span className="userName-input-error popup__input-error" />
-        </div>
-        <div className="popup__input-wrapper">
-          <input
-            className="popup__input popup__input_type_job"
-            type="text"
-            name="userJob"
-            placeholder="Ваше призвание"
-            required
-            minLength="2"
-            maxLength="200"
-            id="userJob-input"
-          />
-          <span className="userJob-input-error popup__input-error" />
-        </div>
-      </PopupWithForm>
+      <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
 
       <PopupWithForm
         name="add"
