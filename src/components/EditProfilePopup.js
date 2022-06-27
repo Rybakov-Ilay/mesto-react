@@ -4,12 +4,12 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
   const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
+  const [about, setAbout] = useState("");
   const currentUser = useContext(CurrentUserContext);
 
   useEffect(() => {
     setName(currentUser.name);
-    setDescription(currentUser.about);
+    setAbout(currentUser.about);
   }, [currentUser]);
 
   function handleNameChange(e) {
@@ -17,18 +17,14 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
   }
 
   function handleDescriptionChange(e) {
-    setDescription(e.target.value);
+    setAbout(e.target.value);
   }
 
   function handleSubmit(e) {
     // Запрещаем браузеру переходить по адресу формы
     e.preventDefault();
-
     // Передаём значения управляемых компонентов во внешний обработчик
-    onUpdateUser({
-      name,
-      about: description,
-    });
+    onUpdateUser({ name, about });
   }
 
   return (
@@ -64,7 +60,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
           minLength="2"
           maxLength="200"
           id="userJob-input"
-          value={description}
+          value={about}
           onChange={handleDescriptionChange}
         />
         <span className="userJob-input-error popup__input-error" />

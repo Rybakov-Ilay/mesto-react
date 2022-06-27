@@ -62,7 +62,7 @@ function App() {
           name: res.name,
           about: res.about,
           avatar: res.avatar,
-          _id: res._id
+          _id: res._id,
         });
         closeAllPopups();
       })
