@@ -5,11 +5,11 @@ import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
+import AddPlacePopup from "./AddPlacePopup";
 
 import React, { useState, useEffect } from "react";
 import api from "../utils/Api";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
-import AddPlacePopup from "./AddPlacePopup";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
