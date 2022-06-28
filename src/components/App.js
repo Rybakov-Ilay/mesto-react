@@ -9,6 +9,7 @@ import EditAvatarPopup from "./EditAvatarPopup";
 import React, { useState, useEffect } from "react";
 import api from "../utils/Api";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import AddPlacePopup from "./AddPlacePopup";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
@@ -16,13 +17,6 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({});
-
-
-
-
-
-
-
   const [cards, setCards] = useState([]);
 
   function handleCardLike(card) {
@@ -58,17 +52,17 @@ function App() {
       });
   }, []);
 
-
-
-
-
-
-
-
-
-
-
-
+  function handleAddPlace(card) {
+    api
+      .addNewCard(card)
+      .then((newCard) => {
+        setCards([newCard, ...cards]);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   useEffect(() => {
     api
@@ -172,39 +166,11 @@ function App() {
           onUpdateAvatar={handleUpdateAvatar}
         />
 
-        <PopupWithForm
-          name="add"
-          title="Новое место"
+        <AddPlacePopup
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
-        >
-          <div className="popup__input-wrapper">
-            <input
-              className="popup__input popup__input_type_place-name"
-              type="text"
-              name="placeName"
-              placeholder="название"
-              required
-              minLength="2"
-              maxLength="30"
-              id="placeName-input"
-            />
-
-            <span className="placeName-input-error popup__input-error" />
-          </div>
-          <div className="popup__input-wrapper">
-            <input
-              className="popup__input popup__input_type_place-link"
-              type="url"
-              name="placeLink"
-              placeholder="ссылка на картинку"
-              required
-              id="placeLink-input"
-            />
-
-            <span className="placeLink-input-error popup__input-error" />
-          </div>
-        </PopupWithForm>
+          onAddPlace={handleAddPlace}
+        />
 
         <PopupWithForm
           name="delete"
