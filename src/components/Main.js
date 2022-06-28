@@ -1,44 +1,17 @@
-import React, { useState, useEffect, useContext } from "react";
-import api from "../utils/Api";
+import React, { useContext } from "react";
 import Card from "./сard.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
-function Main(props) {
+function Main({
+  cards,
+  onCardDelete,
+  onCardLike,
+  onAddPlace,
+  onEditProfile,
+  onEditAvatar,
+  onCardClick,
+}) {
   const currentUser = useContext(CurrentUserContext);
-  const [cards, setCards] = useState([]);
-
-  function handleCardLike(card) {
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
-
-    api
-      .changeLikeCardStatus(card._id, isLiked)
-      .then((newCard) => {
-        setCards((state) =>
-          state.map((c) => (c._id === card._id ? newCard : c))
-        );
-      })
-      .catch((err) => console.log(err));
-  }
-
-  function handleCardDelete(card) {
-    api
-      .deleteCard(card._id)
-      .then(() => {
-        setCards(cards.filter((item) => item._id !== card._id));
-      })
-      .catch((err) => console.log(err));
-  }
-
-  useEffect(() => {
-    api
-      .getInitialCards()
-      .then((data) => {
-        setCards(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
 
   return (
     <main className="content">
@@ -49,7 +22,7 @@ function Main(props) {
             src={currentUser.avatar}
             alt="Портрет автора"
           />
-          <div className="profile__avatar-edit" onClick={props.onEditAvatar} />
+          <div className="profile__avatar-edit" onClick={onEditAvatar} />
         </div>
         <div className="profile__info">
           <div className="profile__title-container">
@@ -58,7 +31,7 @@ function Main(props) {
               className="profile__edit-button"
               type="button"
               aria-label="редактировать профиль"
-              onClick={props.onEditProfile}
+              onClick={onEditProfile}
             />
           </div>
           <p className="profile__subtitle">{currentUser.about}</p>
@@ -68,7 +41,7 @@ function Main(props) {
             className="profile__add-button"
             type="button"
             aria-label="добавить фотографию"
-            onClick={props.onAddPlace}
+            onClick={onAddPlace}
           />
         </div>
       </section>
@@ -79,9 +52,9 @@ function Main(props) {
             <Card
               key={card._id}
               card={card}
-              handleClick={props.onCardClick}
-              onCardLike={handleCardLike}
-              onCardDelete={handleCardDelete}
+              handleClick={onCardClick}
+              onCardLike={onCardLike}
+              onCardDelete={onCardDelete}
             />
           ))}
         </ul>
