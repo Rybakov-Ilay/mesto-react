@@ -18,6 +18,7 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({});
   const [cards, setCards] = useState([]);
+  const [renderLoading, setRenderLoading] = useState(false);
 
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
@@ -53,6 +54,7 @@ function App() {
   }, []);
 
   function handleAddPlace(card) {
+    setRenderLoading(true);
     api
       .addNewCard(card)
       .then((newCard) => {
@@ -61,7 +63,8 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
-      });
+      })
+      .finally(() => setRenderLoading(false));
   }
 
   useEffect(() => {
@@ -104,6 +107,7 @@ function App() {
   }
 
   function handleUpdateUser(userData) {
+    setRenderLoading(true);
     api
       .editUser(userData)
       .then((res) => {
@@ -117,10 +121,12 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
-      });
+      })
+      .finally(() => setRenderLoading(false));
   }
 
   function handleUpdateAvatar(avatarLink) {
+    setRenderLoading(true);
     api
       .editAvatar(avatarLink)
       .then((res) => {
@@ -134,7 +140,8 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
-      });
+      })
+      .finally(() => setRenderLoading(false));
   }
 
   return (
@@ -158,18 +165,21 @@ function App() {
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
           onUpdateUser={handleUpdateUser}
+          renderLoading={renderLoading}
         />
 
         <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
           onUpdateAvatar={handleUpdateAvatar}
+          renderLoading={renderLoading}
         />
 
         <AddPlacePopup
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
           onAddPlace={handleAddPlace}
+          renderLoading={renderLoading}
         />
 
         <PopupWithForm

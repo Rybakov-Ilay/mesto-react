@@ -1,7 +1,7 @@
 import PopupWithForm from "./PopupWithForm";
 import React from "react";
 
-function AddPlacePopup({isOpen, onClose, onAddPlace}) {
+function AddPlacePopup({isOpen, onClose, onAddPlace, renderLoading}) {
 
   const placeNameRef = React.useRef();
   const placeLinkRef = React.useRef();
@@ -21,6 +21,7 @@ function AddPlacePopup({isOpen, onClose, onAddPlace}) {
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
+      renderLoading={renderLoading}
     >
       <div className="popup__input-wrapper">
         <input
